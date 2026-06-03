@@ -1,413 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Wystone LLC - Innovative software solutions specializing in SaaS and mobile applications. Based in Playa del Rey, CA.">
-    <meta name="keywords" content="app development, software solutions, SaaS, mobile applications, TidyPhone">
-    <meta name="author" content="Wystone LLC">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wystoneapps.com/">
-    <meta property="og:title" content="Wystone Apps - Innovative Software Solutions">
-    <meta property="og:description" content="Wystone LLC specializes in innovative software solutions, SaaS, and mobile applications.">
-    <meta property="og:image" content="https://wystoneapps.com/assets/wystone-logo-icon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wystone — privacy-first iOS apps & software</title>
+<meta name="description" content="Wystone is an independent software studio building privacy-first iOS apps and web tools — no tracking, no dark patterns, fair pricing. Makers of Stickly and MarkSave.">
+<meta name="author" content="Wystone LLC">
+<link rel="canonical" href="https://wystoneapps.com/">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://wystoneapps.com/">
-    <meta property="twitter:title" content="Wystone Apps - Innovative Software Solutions">
-    <meta property="twitter:description" content="Wystone LLC specializes in innovative software solutions, SaaS, and mobile applications.">
-    <meta property="twitter:image" content="https://wystoneapps.com/assets/wystone-logo-icon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wystoneapps.com/">
+<meta property="og:title" content="Wystone — privacy-first iOS apps & software">
+<meta property="og:description" content="An independent studio building calm, private software. Makers of Stickly and MarkSave.">
 
-    <title>Wystone Apps - Innovative Software Solutions</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/wystone-logo-icon.svg">
+<link rel="icon" type="image/png" href="stickly/assets/stickly-icon.png">
+
+<script>
+  (function () { try { var t = localStorage.getItem('wystone-theme'); if (t==='light'||t==='dark') document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@type":"Organization","name":"Wystone LLC","url":"https://wystoneapps.com/","email":"support@wystoneapps.com","description":"Independent software studio building privacy-first iOS apps and web tools." }
+</script>
+
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#0B0C0E; --surface:#15171B; --surface-2:#1E2127;
+    --stroke:rgba(255,255,255,0.10); --text:#ECECEE; --muted:#9AA0A8;
+    --btn:#EDEDEF; --btn-text:#0B0C0E; --teal:#21D4C7; --orange:#F7820D; --shadow:rgba(0,0,0,0.45);
+  }
+  [data-theme="light"]{
+    --bg:#FAFAF7; --surface:#FFFFFF; --surface-2:#F1F0EA;
+    --stroke:rgba(0,0,0,0.12); --text:#16181C; --muted:#5C636C;
+    --btn:#16181C; --btn-text:#FFFFFF; --teal:#0E8E84; --orange:#C9690A; --shadow:rgba(0,0,0,0.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",sans-serif;font-weight:300;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .25s,color .25s}
+  a{color:inherit;text-decoration:none}
+  strong{font-weight:500}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{position:relative}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:.95rem;padding:11px 20px;border-radius:6px;border:1px solid transparent;cursor:pointer;transition:transform .15s,opacity .2s}
+  .btn-primary{background:var(--btn);color:var(--btn-text);border-color:var(--btn)}
+  .btn-primary:hover{transform:translateY(-1px);opacity:.9}
+  .btn-ghost{background:transparent;border:1px solid var(--stroke);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--text)}
+
+  nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--stroke)}
+  .nav-in{display:flex;align-items:center;gap:14px;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:500;font-size:1.1rem;letter-spacing:-.01em}
+  .mark{width:28px;height:28px;border-radius:6px;border:1px solid var(--stroke);display:grid;place-items:center;background:var(--surface)}
+  .mark svg{width:16px;height:16px}
+  .nav-links{display:flex;gap:22px;margin-left:auto;font-size:.92rem}
+  .nav-links a{color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .theme-toggle{width:38px;height:38px;border-radius:6px;background:var(--surface);border:1px solid var(--stroke);display:grid;place-items:center;cursor:pointer;color:var(--text);font-size:16px}
+  .theme-toggle:hover{border-color:var(--text)}
+  [data-theme="dark"] .theme-toggle .sun{display:none}
+  [data-theme="light"] .theme-toggle .moon{display:none}
+
+  .hero{padding:90px 0 60px;max-width:760px}
+  .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--stroke);background:var(--surface);padding:6px 12px;border-radius:6px;margin-bottom:22px;font-weight:400}
+  h1{font-size:clamp(2.4rem,6vw,3.8rem);font-weight:300;line-height:1.08;letter-spacing:-.02em}
+  .hero p{margin-top:20px;font-size:clamp(1.05rem,2.2vw,1.25rem);color:var(--muted);max-width:620px}
+  .hero-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+
+  .section-pad{padding:56px 0;border-top:1px solid var(--stroke)}
+  .kicker{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
+  h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:300;letter-spacing:-.01em;margin-top:8px}
+  .section-pad > .wrap > p.lead{color:var(--muted);max-width:640px;margin-top:12px}
+
+  .apps{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+  .app{background:var(--surface);border:1px solid var(--stroke);border-radius:6px;padding:28px;display:flex;flex-direction:column}
+  .app-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .app-head img{width:56px;height:56px;border-radius:12px;display:block}
+  .app-name{font-size:1.25rem;font-weight:500;letter-spacing:-.01em}
+  .app-tag{font-size:.86rem;color:var(--muted)}
+  .app p{color:var(--muted);font-size:.96rem;flex:1}
+  .app-accent-teal .app-name{color:var(--teal)}
+  .app-accent-orange .app-name{color:var(--orange)}
+  .app-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .chip{font-size:.85rem;font-weight:400;color:var(--text);border:1px solid var(--stroke);border-radius:6px;padding:8px 14px;transition:border-color .2s}
+  .chip:hover{border-color:var(--text)}
+
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+  .val{background:var(--surface);border:1px solid var(--stroke);border-radius:6px;padding:22px}
+  .val h3{font-size:1.02rem;font-weight:500;margin-bottom:6px}
+  .val p{color:var(--muted);font-size:.92rem}
+
+  .contact{background:var(--surface);border:1px solid var(--stroke);border-radius:6px;padding:40px 28px;text-align:center;margin-top:32px}
+  .contact .email{font-size:1.15rem;font-weight:500;margin:12px 0 18px;display:inline-block}
+  .cform{display:flex;flex-direction:column;gap:12px;max-width:520px;margin:0 auto;text-align:left}
+  .cform input,.cform textarea{width:100%;background:var(--surface-2);border:1px solid var(--stroke);border-radius:6px;padding:12px 14px;color:var(--text);font:inherit;font-weight:300}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--text)}
+  .cform textarea{resize:vertical}
+  .cform button{margin-top:4px;align-self:flex-start}
+
+  footer{border-top:1px solid var(--stroke);padding:30px 0;color:var(--muted);font-size:.85rem}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot a{color:var(--muted);margin-left:16px}
+  .foot a:hover{color:var(--text)}
+
+  @media(max-width:780px){ .nav-links{display:none} .apps,.three{grid-template-columns:1fr} .foot{flex-direction:column;text-align:center} .foot a{margin:0 8px} }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#home">
-                <img src="assets/wystone-logo-icon.svg" alt="Wystone Apps" width="40" height="40" class="me-2">
-                <span class="fw-bold">Wystone Apps</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tidyphone">TidyPhone</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5 L7 19 L12 9 L17 19 L21 5"/></svg></span>
+      Wystone
+    </a>
+    <div class="nav-links">
+      <a href="#apps">Apps</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark mode"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+  </div>
+</nav>
+
+<section class="hero wrap" id="top">
+  <span class="eyebrow">Independent software studio · USA</span>
+  <h1>Software that respects you.</h1>
+  <p>Wystone builds privacy-first iOS apps and web tools — no tracking, no dark patterns, no nonsense. Just fast, focused products made by people who use them every day.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#apps">See our apps</a>
+    <a class="btn btn-ghost" href="#contact">Get in touch</a>
+  </div>
+</section>
+
+<section class="section-pad" id="apps">
+  <div class="wrap">
+    <span class="kicker">Our apps</span>
+    <h2>Live on the App Store</h2>
+    <div class="apps">
+      <div class="app app-accent-teal">
+        <div class="app-head">
+          <img src="stickly/assets/stickly-icon.png" alt="Stickly icon">
+          <div>
+            <div class="app-name">Stickly</div>
+            <div class="app-tag">Habits &amp; Focus</div>
+          </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <h1 class="display-4 fw-bold mb-4">Wystone Apps: Innovative Software Solutions</h1>
-                        <p class="lead mb-4">Wystone LLC, a Wyoming Limited Liability Company, delivers cutting-edge software solutions from our headquarters in Playa del Rey, California. Specializing in SaaS and mobile applications that transform businesses, with our flagship TidyPhone product currently in pre-launch review.</p>
-                        <div class="d-flex flex-column flex-sm-row gap-3">
-                            <a href="#tidyphone" class="btn btn-primary btn-lg">Join the TidyPhone Waitlist</a>
-                            <a href="#about" class="btn btn-outline-light btn-lg">Company Overview</a>
-                        </div>
-                        <div class="mt-4">
-                            <small class="text-light-50">
-                                <i class="bi bi-building me-1"></i> Wyoming LLC • 
-                                <i class="bi bi-geo-alt me-1"></i> Playa del Rey, CA • 
-                                <i class="bi bi-calendar me-1"></i> Est. 2025
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Software Development" class="img-fluid rounded shadow-lg">
-                    </div>
-                </div>
-            </div>
+        <p>Block the apps that distract you, run real focus sessions, and build habits that stick — solo or alongside friends. Genuine iOS-level blocking, ADHD-friendly, fairly priced.</p>
+        <div class="app-links">
+          <a class="chip" href="/stickly/">Learn more →</a>
+          <a class="chip" href="https://apps.apple.com/us/app/stickly-habits-focus/id6756774401" target="_blank" rel="noopener">App Store ↗</a>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                         alt="About Wystone Apps" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold mb-4">About Wystone LLC</h2>
-                    <p class="lead">Professional software development with corporate integrity</p>
-                    <p class="mb-3">Wystone LLC is a Wyoming Limited Liability Company established in 2025, combining the flexibility of modern software development with the stability of a properly structured corporate entity.</p>
-                    
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                                <span>Wyoming LLC Registered</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                                <span>Federal EIN Assigned</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                                <span>Playa del Rey, CA Operations</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                                <span>SaaS & Mobile Focus</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h4 class="fw-semibold mb-3">Corporate Information</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><strong>Entity:</strong> Wystone LLC (Wyoming Limited Liability Company)</li>
-                        <li class="mb-2"><strong>Registered Agent:</strong> Northwest Registered Agent Service Inc</li>
-                        <li class="mb-2"><strong>Registered Address:</strong> 30 N Gould St Ste N, Sheridan, WY 82801</li>
-                        <li class="mb-2"><strong>Operating Address:</strong> 322 Culver Blvd, Unit #V242, Playa del Rey, CA 90293</li>
-                    </ul>
-                </div>
-            </div>
+      </div>
+      <div class="app app-accent-orange">
+        <div class="app-head">
+          <img src="assets/marksave-icon.png" alt="MarkSave icon">
+          <div>
+            <div class="app-name">MarkSave</div>
+            <div class="app-tag">Save links · read &amp; watch later</div>
+          </div>
         </div>
-    </section>
-
-    <!-- TidyPhone Section -->
-    <section id="tidyphone" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Introducing TidyPhone</h2>
-                <p class="lead">AI-driven device management for the modern mobile experience</p>
-            </div>
-            
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                         alt="TidyPhone App" class="img-fluid rounded shadow-lg">
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <h3 class="fw-bold mb-3">Revolutionary Device Management</h3>
-                    <p class="mb-4">TidyPhone leverages artificial intelligence to automatically organize, optimize, and secure your mobile device. Experience a cleaner, faster, and more efficient smartphone.</p>
-                    
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="bi bi-star-fill text-warning me-2 mt-1"></i>
-                                <div>
-                                    <strong>Smart Organization</strong>
-                                    <p class="mb-0 small">AI-powered categorization and cleanup of apps and files</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="bi bi-shield-check text-success me-2 mt-1"></i>
-                                <div>
-                                    <strong>Privacy Protection</strong>
-                                    <p class="mb-0 small">Advanced security monitoring and threat detection</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="bi bi-lightning-charge text-primary me-2 mt-1"></i>
-                                <div>
-                                    <strong>Performance Boost</strong>
-                                    <p class="mb-0 small">Optimize battery life and processing speed automatically</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="alert alert-info mb-4">
-                        <i class="bi bi-info-circle me-2"></i>
-                        <strong>Coming Soon:</strong> TidyPhone is currently in review for Apple App Store and Google Play Store approval.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Waitlist Signup -->
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card border-0 shadow">
-                        <div class="card-body p-5">
-                            <h4 class="card-title text-center mb-4">Join the TidyPhone Waitlist</h4>
-                            <p class="text-center mb-4">Be the first to experience revolutionary device management.</p>
-                            <form id="waitlist-form" action="https://formsubmit.co/ajax/support@wystoneapps.com" method="POST">
-                                <input type="hidden" name="_subject" value="TidyPhone Waitlist Submission">
-                                <input type="hidden" name="request_type" value="TidyPhone Waitlist">
-                                <input type="hidden" name="_template" value="table">
-                                <input type="hidden" name="_captcha" value="false">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="waitlist-name" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="waitlist-name" name="name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="waitlist-email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="waitlist-email" name="email" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="waitlist-device" class="form-label">Primary Device</label>
-                                        <select class="form-select" id="waitlist-device" name="device">
-                                            <option value="">Select device type</option>
-                                            <option value="ios">iOS (iPhone/iPad)</option>
-                                            <option value="android">Android</option>
-                                            <option value="both">Both</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="waitlist-interest" class="form-label">Interest Level</label>
-                                        <select class="form-select" id="waitlist-interest" name="interest">
-                                            <option value="casual">Just curious</option>
-                                            <option value="interested">Very interested</option>
-                                            <option value="early-adopter">Early adopter</option>
-                                            <option value="enterprise">Enterprise inquiry</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-lg w-100">Join Waitlist</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="waitlist-success" class="alert alert-success mt-3" style="display: none;">
-                                <i class="bi bi-check-circle me-2"></i>Thank you for joining our waitlist! We'll keep you updated.
-                            </div>
-                            <div id="waitlist-error" class="alert alert-danger mt-3" style="display: none;">
-                                <i class="bi bi-exclamation-triangle me-2"></i>Something went wrong. Please try again or email support@wystoneapps.com directly.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <p>Save any link, video, or article to one private library in a tap. Watch in-app with Picture-in-Picture, read distraction-free, sync over iCloud. Zero data collected — your library stays yours.</p>
+        <div class="app-links">
+          <a class="chip" href="https://apps.apple.com/us/app/marksave/id6772652552" target="_blank" rel="noopener">App Store ↗</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Contact Wystone Apps</h2>
-                <p class="lead">Get in touch with our development team</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="text-primary mb-3">
-                                <i class="bi bi-envelope-fill fs-1"></i>
-                            </div>
-                            <h5 class="card-title">Email Support</h5>
-                            <p class="card-text">
-                                <a href="mailto:support@wystoneapps.com" class="text-decoration-none">support@wystoneapps.com</a>
-                            </p>
-                            <small class="text-muted">Response within 24 hours</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="text-primary mb-3">
-                                <i class="bi bi-geo-alt-fill fs-1"></i>
-                            </div>
-                            <h5 class="card-title">Mailing & Meeting Address</h5>
-                            <p class="card-text mb-3">
-                                322 Culver Blvd, Unit #V242<br>
-                                Playa del Rey, CA 90293 (Secure Mail Suite)
-                            </p>
-                            <small class="text-muted d-block">In-person meetings available by advance appointment only.</small>
-                            <small class="text-muted">No walk-in services at this location.</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="text-primary mb-3">
-                                <i class="bi bi-building-fill fs-1"></i>
-                            </div>
-                            <h5 class="card-title">Corporate Info</h5>
-                            <ul class="list-unstyled text-start mb-3">
-                                <li><strong>Entity:</strong> Wystone LLC (Wyoming LLC)</li>
-                                <li><strong>Status:</strong> Active & in good standing</li>
-                                <li><strong>Federal EIN:</strong> Assigned</li>
-                                <li><strong>Registered Agent:</strong> Northwest Registered Agent Service Inc</li>
-                                <li><strong>Registered Office:</strong> 30 N Gould St Ste N, Sheridan, WY 82801</li>
-                            </ul>
-                            <small class="text-muted">Documentation available upon request.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Contact Form -->
-            <div class="row mt-5">
-                <div class="col-lg-8 mx-auto">
-                    <div class="card border-0 shadow">
-                        <div class="card-body p-5">
-                            <h4 class="card-title text-center mb-4">Send Us a Message</h4>
-                            <form id="contact-form" action="https://formsubmit.co/ajax/support@wystoneapps.com" method="POST">
-                                <input type="hidden" name="_subject" value="New Wystone Apps Contact Inquiry">
-                                <input type="hidden" name="request_type" value="General Contact">
-                                <input type="hidden" name="_template" value="table">
-                                <input type="hidden" name="_captcha" value="false">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="contact-name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="contact-name" name="name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="contact-email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="contact-email" name="email" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="contact-company" class="form-label">Company</label>
-                                        <input type="text" class="form-control" id="contact-company" name="company">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="contact-phone" class="form-label">Phone</label>
-                                        <input type="tel" class="form-control" id="contact-phone" name="phone">
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="contact-subject" class="form-label">Subject</label>
-                                        <select class="form-select" id="contact-subject" name="subject" required>
-                                            <option value="">Select subject</option>
-                                            <option value="general">General Inquiry</option>
-                                            <option value="tidyphone">TidyPhone Information</option>
-                                            <option value="partnership">Partnership Opportunity</option>
-                                            <option value="enterprise">Enterprise Solutions</option>
-                                            <option value="support">Technical Support</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="contact-message" class="form-label">Message</label>
-                                        <textarea class="form-control" id="contact-message" name="message" rows="5" required></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="contact-success" class="alert alert-success mt-3" style="display: none;">
-                                <i class="bi bi-check-circle me-2"></i>Thank you for your message! We'll get back to you soon.
-                            </div>
-                            <div id="contact-error" class="alert alert-danger mt-3" style="display: none;">
-                                <i class="bi bi-exclamation-triangle me-2"></i>We couldn't submit your message. Please try again or email support@wystoneapps.com.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="section-pad">
+  <div class="wrap">
+    <span class="kicker">Beyond the App Store</span>
+    <h2>We also build SaaS.</h2>
+    <p class="lead">Alongside our apps, Wystone designs and builds web-based software tools. Have a project or partnership in mind? We'd love to hear about it — <a href="#contact" style="color:var(--text);border-bottom:1px solid var(--stroke)">get in touch</a>.</p>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <p class="mb-0">&copy; 2025 Wystone LLC. All rights reserved.</p>
-                    <p class="mb-0 small">Wyoming Limited Liability Company | Federal EIN Applied</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="mb-2">
-                        <a href="privacy.html" class="text-light text-decoration-none me-3">Privacy Policy</a>
-                        <a href="terms.html" class="text-light text-decoration-none">Terms of Service</a>
-                    </div>
-                    <div>
-                        <a href="https://twitter.com/wystoneapps" class="text-light me-3" target="_blank" rel="noopener">
-                            <i class="bi bi-twitter fs-5"></i>
-                        </a>
-                        <a href="https://linkedin.com/company/wystoneapps" class="text-light" target="_blank" rel="noopener">
-                            <i class="bi bi-linkedin fs-5"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<section class="section-pad" id="about">
+  <div class="wrap">
+    <span class="kicker">How we build</span>
+    <h2>A few principles.</h2>
+    <div class="three">
+      <div class="val"><h3>Privacy-first</h3><p>Most of our apps collect zero personal data. No analytics, no trackers, no third-party SDKs. Your data stays on your device.</p></div>
+      <div class="val"><h3>Fair pricing</h3><p>Generous free tiers, honest trials, and no subscription traps. We never move a free feature behind a paywall after the fact.</p></div>
+      <div class="val"><h3>Built to last</h3><p>Native, fast, and quietly maintained. We make tools we rely on ourselves — and we answer our own support email.</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+<section class="section-pad" id="contact">
+  <div class="wrap">
+    <span class="kicker">Contact</span>
+    <h2>Get in touch.</h2>
+    <div class="contact">
+      <p style="color:var(--muted);margin-bottom:20px">Questions, partnerships, or support — we read every message and typically reply within 24 hours.</p>
+      <form class="cform" action="https://formsubmit.co/support@wystoneapps.com" method="POST">
+        <input type="hidden" name="_subject" value="New message from wystoneapps.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://wystoneapps.com/">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <input name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
+        <button class="btn btn-primary" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Wystone LLC · USA</div>
+    <div>
+      <a href="mailto:support@wystoneapps.com">support@wystoneapps.com</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="https://apps.apple.com/us/developer/wystone-llc/id1851750664" target="_blank" rel="noopener">App Store</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){var root=document.documentElement,b=document.getElementById('themeToggle');if(b)b.addEventListener('click',function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('wystone-theme',n);}catch(e){}});})();
+</script>
+
 </body>
 </html>

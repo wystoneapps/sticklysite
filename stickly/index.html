@@ -145,6 +145,10 @@
   .feature li{display:flex;gap:10px;align-items:flex-start;color:var(--text);font-weight:300}
   .feature li .ck{color:var(--teal);flex-shrink:0}
   .fmock{border-radius:6px;min-height:320px;background:var(--surface);border:1px solid var(--stroke);display:grid;place-items:center;color:var(--muted);font-weight:300;box-shadow:0 14px 40px var(--shadow);text-align:center;padding:24px}
+  /* PRE-PHOTO LAUNCH: hide screenshot placeholders until real images are added (remove these 3 lines to restore mockups) */
+  .shots{display:none}
+  .fmock{display:none}
+  .feature{grid-template-columns:1fr}
 
   .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
   .lane{background:var(--surface);border:1px solid var(--stroke);border-radius:6px;padding:22px}
