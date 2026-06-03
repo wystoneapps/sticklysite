@@ -81,8 +81,12 @@
   .app p{color:var(--muted);font-size:.96rem;flex:1}
   .app-accent-teal .app-name{color:var(--teal)}
   .app-accent-orange .app-name{color:var(--orange)}
-  .app-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .app-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;align-items:center}
   .chip{font-size:.85rem;font-weight:400;color:var(--text);border:1px solid var(--stroke);border-radius:6px;padding:8px 14px;transition:border-color .2s}
+  .appbadge{display:inline-block;line-height:0}
+  .appbadge img{height:46px;width:auto;display:block}
+  [data-theme="dark"] .appbadge .badge-light{display:none}
+  [data-theme="light"] .appbadge .badge-dark{display:none}
   .chip:hover{border-color:var(--text)}
 
   .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
@@ -148,8 +152,8 @@
         </div>
         <p>Block the apps that distract you, run real focus sessions, and build habits that stick — solo or alongside friends. Genuine iOS-level blocking, ADHD-friendly, fairly priced.</p>
         <div class="app-links">
+          <a class="appbadge" href="https://apps.apple.com/us/app/stickly-habits-focus/id6756774401" target="_blank" rel="noopener" aria-label="Download Stickly on the App Store"><img class="badge-dark" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store" loading="lazy"><img class="badge-light" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" loading="lazy"></a>
           <a class="chip" href="/stickly/">Learn more →</a>
-          <a class="chip" href="https://apps.apple.com/us/app/stickly-habits-focus/id6756774401" target="_blank" rel="noopener">App Store ↗</a>
         </div>
       </div>
       <div class="app app-accent-orange">
@@ -162,7 +166,7 @@
         </div>
         <p>Save any link, video, or article to one private library in a tap. Watch in-app with Picture-in-Picture, read distraction-free, sync over iCloud. Zero data collected — your library stays yours.</p>
         <div class="app-links">
-          <a class="chip" href="https://apps.apple.com/us/app/marksave/id6772652552" target="_blank" rel="noopener">App Store ↗</a>
+          <a class="appbadge" href="https://apps.apple.com/us/app/marksave/id6772652552" target="_blank" rel="noopener" aria-label="Download MarkSave on the App Store"><img class="badge-dark" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store" loading="lazy"><img class="badge-light" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" loading="lazy"></a>
         </div>
       </div>
     </div>

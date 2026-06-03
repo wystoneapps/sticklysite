@@ -80,6 +80,10 @@
   .btn-primary{background:var(--teal);color:var(--on-teal);font-weight:500;border-color:var(--teal)}
   .btn-primary:hover{transform:translateY(-1px);opacity:.92}
   .btn-ghost{background:transparent;border:1px solid var(--stroke);color:var(--text)}
+  .appbadge{display:inline-block;line-height:0}
+  .appbadge img{height:50px;width:auto;display:block}
+  [data-theme="dark"] .appbadge .badge-light{display:none}
+  [data-theme="light"] .appbadge .badge-dark{display:none}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
 
   nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--stroke)}
@@ -117,7 +121,7 @@
   h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:200;line-height:1.08;letter-spacing:-.01em}
   h1 .accent{color:var(--teal)}
   .sub{max-width:680px;margin:22px auto 0;font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);font-weight:200}
-  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;align-items:center}
   .trust{margin-top:20px;color:var(--muted);font-size:.9rem;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-weight:300}
   .trust span{display:inline-flex;align-items:center;gap:6px}
 
@@ -227,7 +231,7 @@
     <h1 data-i18n-html="hero.h1">Block apps. <span class="accent">Focus.</span> Win.</h1>
     <p class="sub" data-i18n="hero.sub">Pick the apps that steal your attention — Instagram, TikTok, X, whatever your weakness is — and Stickly refuses to let them open while you focus. No willpower required.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://apps.apple.com/app/stickly-habits-focus/id6756774401" target="_blank" rel="noopener" data-i18n="hero.cta1">Download on the App Store</a>
+      <a class="appbadge" href="https://apps.apple.com/app/stickly-habits-focus/id6756774401" target="_blank" rel="noopener" aria-label="Download on the App Store"><img class="badge-dark" data-badge="white" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store"><img class="badge-light" data-badge="black" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store"></a>
       <a class="btn btn-ghost" href="#how" data-i18n="hero.cta2">See how it works</a>
     </div>
     <div class="trust">
@@ -408,6 +412,12 @@
         var k = el.getAttribute('data-i18n-html'); if (d[k] != null) el.innerHTML = d[k];
       });
       document.documentElement.lang = lang.split('-')[0];
+      var appleLoc = ({en:'en-us',ca:'ca-es',es:'es-es',fr:'fr-fr',de:'de-de',it:'it-it','pt-PT':'pt-pt',ja:'ja-jp',ko:'ko-kr','zh-Hans':'zh-cn',hi:'hi-in'})[lang] || 'en-us';
+      document.querySelectorAll('.appbadge img').forEach(function (im) {
+        var c = im.getAttribute('data-badge') || 'white';
+        im.onerror = function () { this.onerror = null; this.src = 'https://tools.applemediaservices.com/api/badges/download-on-the-app-store/' + c + '/en-us?size=250x83'; };
+        im.src = 'https://tools.applemediaservices.com/api/badges/download-on-the-app-store/' + c + '/' + appleLoc + '?size=250x83';
+      });
       var cur = document.getElementById('langCurrent');
       if (cur) cur.textContent = I.langs[lang].code;
     }
