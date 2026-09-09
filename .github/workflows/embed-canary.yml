@@ -2,9 +2,9 @@ name: MarkSave YT embed canary
 
 # Watches the YouTube EMBED PLAYER (the Error-153 path) by loading the hidden
 # wrapper page on wystoneapps.com in headless Chromium every 2 hours.
-# Companion to the API canary in the markSave repo. Alerts go to the ntfy topic
-# (push on your iPhone); a failed run additionally triggers GitHub's own
-# "Run failed: MarkSave YT embed canary" email as backup.
+# Companion to the API canary in the markSave repo. A failed workflow may mean
+# monitoring infrastructure failed, NOT that app playback broke. Read the run
+# summary before treating a GitHub failure email as a product incident.
 #
 # NOTE: GitHub disables scheduled workflows after 60 days with no repo activity —
 # any push re-arms it.
@@ -13,20 +13,49 @@ on:
   schedule:
     - cron: "17 */2 * * *"   # every 2 hours (offset to dodge top-of-hour load)
   workflow_dispatch: {}       # run on demand from the Actions tab
+  push:
+    branches: [main, codex/marksave-canary-reliability]
+    paths:
+      - .github/workflows/embed-canary.yml
+      - scripts/embed_canary.py
+      - scripts/test_embed_canary.py
+
+permissions:
+  contents: read
 
 jobs:
   embed-canary:
-    runs-on: ubuntu-latest
+    name: Monitor setup and YouTube embed check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    # Browsers and OS dependencies are preinstalled. This avoids apt updates on
+    # every probe, including unrelated repositories such as Google Chrome's,
+    # whose Hash Sum mismatch prevented the 2026-09-09 probe from running.
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.62.0-noble
+      options: --shm-size=1gb
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
         with:
-          python-version: "3.12"
-      - name: Install Playwright
-        run: |
-          pip install playwright
-          python -m playwright install --with-deps chromium
-      - name: Run embed canary
+          persist-credentials: false
+      - name: Install pinned monitoring client (not a playback test)
+        run: python -m pip install --disable-pip-version-check --retries 5 --timeout 30 playwright==1.62.0
+      - name: Test monitor error classification
+        run: python -m unittest discover -s scripts -p 'test_embed_canary.py' -v
+      - name: Check the hosted YouTube embed (not native app playback)
+        id: probe
         env:
           NTFY_TOPIC: ${{ vars.NTFY_TOPIC || 'Marksave_YT_alerts' }}
+          # Code-change validation must not send test notifications to Roger.
+          CANARY_NOTIFY: ${{ github.ref == 'refs/heads/main' && github.event_name != 'push' && '1' || '0' }}
         run: python scripts/embed_canary.py
+      - name: Explain setup or regression-test failure
+        if: ${{ failure() && steps.probe.outcome == 'skipped' }}
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'SUMMARY'
+          ## MONITOR ERROR: YouTube playback was not checked
+
+          The monitoring setup or its regression tests failed before the embed
+          probe could run. This is not evidence of an app playback failure.
+          Inspect the failed setup/test step and restore monitoring.
+          SUMMARY
