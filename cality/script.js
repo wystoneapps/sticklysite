@@ -1,0 +1,2 @@
+const viewDescriptions={calendar:'Cality month and agenda view with fictional events',zoom:'Cality detailed calendar view with fictional scheduled events'};
+document.querySelectorAll('[data-screen]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-screen]').forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));});const image=document.getElementById('view-image');image.src=`assets/${button.dataset.screen}.png`;image.alt=viewDescriptions[button.dataset.screen];}));
