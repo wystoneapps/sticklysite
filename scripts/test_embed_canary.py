@@ -52,6 +52,13 @@ class EmbedCanaryTests(unittest.TestCase):
         self.assertEqual(self.run_main(self.page([("Sign in to confirm you're not a bot. Embed configuration error", True)])), 0)
         self.assertEqual(canary.classify("Consent required before embed configuration error", False), "INCONCLUSIVE")
 
+    def test_unavailable_video_is_not_global_failure(self):
+        self.assertEqual(canary.classify("Video unavailable", True), "VIDEO_UNAVAILABLE")
+        self.assertEqual(self.run_main(self.page([("Video unavailable", True)])), 0)
+
+    def test_visible_controls_do_not_prove_playback(self):
+        self.assertEqual(canary.classify("", True), "PLAYER_UI_ONLY")
+
     def test_bare_embed_is_not_broken(self):
         self.assertEqual(canary.classify("An unusual embed issue", False), "UNUSUAL")
 

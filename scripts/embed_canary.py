@@ -64,9 +64,11 @@ def classify(error_text: str, has_player: bool) -> str:
         return "INCONCLUSIVE"
     if error_text and BROKEN_PATTERNS.search(error_text):
         return "BROKEN"
+    if error_text and re.search(r"video unavailable|video is unavailable|private video|removed by", error_text, re.IGNORECASE):
+        return "VIDEO_UNAVAILABLE"
     if error_text:
         return "UNUSUAL"
-    return "HEALTHY" if has_player else "INCONCLUSIVE"
+    return "PLAYER_UI_ONLY" if has_player else "INCONCLUSIVE"
 
 
 def inspect(page, now: str) -> int:
@@ -89,6 +91,11 @@ def inspect(page, now: str) -> int:
              f"Hosted test video shows a visible config/embed error:\n{error_text}\n{now}\n"
              "This tests the embed fallback only. Native app playback may still work; "
              "video-specific restrictions may also apply.")
+    elif status == "VIDEO_UNAVAILABLE":
+        push("MarkSave: YouTube test video unavailable",
+             f"The single hosted test video is unavailable in this probe:\n{error_text}\n{now}\n"
+             "This does not establish an app-wide outage. Check the test video and a second public video.",
+             priority="default")
     elif status == "UNUSUAL":
         push("MarkSave: unusual YouTube embed error",
              f"Hosted embed probe saw an unrecognized visible error:\n{error_text}\n{now}",
